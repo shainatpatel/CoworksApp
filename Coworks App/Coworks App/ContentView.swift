@@ -11,7 +11,6 @@ struct Machine: Identifiable, Equatable {
     let id = UUID()
     let name: String
 
-    // Implement the == operator for the Equatable protocol
     static func ==(lhs: Machine, rhs: Machine) -> Bool {
         return lhs.id == rhs.id
     }
@@ -38,7 +37,7 @@ class BookingViewModel: ObservableObject {
 
 
 struct HomePageView: View {
-    // Example image names (replace with your actual image names or references)
+    
     let imageNames = ["beam", "Image", "b", "b 1"]
 
     var body: some View {
@@ -48,19 +47,18 @@ struct HomePageView: View {
                 Text("Welcome to the BeAM Makerspace")
                     .font(.largeTitle)
                     .foregroundColor(Color.blue)
-                    .padding(.top)  // Add padding at the top only
+                    .padding(.top)
                 
-                // Horizontal ScrollView
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {  // Adjust the spacing as needed
+                    HStack(spacing: 10) {
                         ForEach(imageNames, id: \.self) { imageName in
                             Image(imageName)
                                 .resizable()
-                                .scaledToFill()  // Fill the frame while maintaining the aspect ratio
-                                .frame(width: 300, height: 200) // Define a fixed width for each image
-                                .clipped()  // Clip the images to the bounds of the frame
-                                .cornerRadius(10)  // Optional: if you want rounded corners
-                                .padding(.vertical)  // Add padding to top and bottom if needed
+                                .scaledToFill()
+                                .frame(width: 300, height: 200)
+                                .clipped()
+                                .cornerRadius(10)
+                                .padding(.vertical)
                         }
                     }
                 }
@@ -100,11 +98,11 @@ struct HomePageView: View {
 struct ProfileView: View {
     var body: some View {
         GeometryReader { geometry in
-            Image("p") // Replace with your actual image name
+            Image("p")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .ignoresSafeArea() // This will make the image extend into the safe area
+                .ignoresSafeArea()
         }
         .navigationBarTitle("Profile", displayMode: .inline)
     }
@@ -169,7 +167,7 @@ struct MachineSelectionView: View {
 struct AppointmentBookingView: View {
     var machineName: String
     @StateObject var bookingViewModel = BookingViewModel()
-    @State private var showConfirmation = false // New state to control navigation
+    @State private var showConfirmation = false
 
     var body: some View {
         Form {
@@ -199,7 +197,7 @@ struct AppointmentBookingView: View {
                             destination: ConfirmationView(machineName: machineName, selectedDate: bookingViewModel.selectedDate),
                             isActive: $showConfirmation
                         )
-                        .hidden() // Hide the NavigationLink itself, only use it for navigation
+                        .hidden()
                     )
                 }
             }
@@ -218,7 +216,7 @@ struct ConfirmationView: View {
                 .padding()
             Text("Machine: \(machineName)")
             Text("Date & Time: \(selectedDate.formatted())")
-            // Add more details as needed
+            
         }
     }
 }
@@ -255,7 +253,7 @@ struct TrainingTimeSelectionView: View {
         List {
             ForEach(times, id: \.self) { time in
                 Button(action: {
-                    // Handle booking the selected time
+                    
                 }) {
                     HStack {
                         Text(time)
